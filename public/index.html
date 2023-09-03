@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Object Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="icon.png">
+</head>
+<body>
+    <div id="main">
+        <h1>Video object detection</h1>
+        <button id="live">Live Object Detection</button>
+        <div id="pic"><img src="bg.jpg" alt=""></div>
+        <form id="upload-form" enctype="multipart/form-data">
+            <label id="lb">
+                <input id="inp" type="file" name="video" accept="video/*">
+                Select File
+            </label>
+            <button type="submit">Upload and Process Video</button>
+        </form>
+    </div>
+    <p style="color:#575655;text-align:center;padding-bottom: 20px;">©️ by team ADGITM</p>
+    <div id="result" style="color:white"></div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const resultDiv = document.getElementById('result');
+        const live = document.getElementById('live');
+
+        live.addEventListener("click", async () => {
+        try {
+            const response = await fetch('/live', {  // Modify the URL to match your backend endpoint
+                method: 'GET'  // You can use 'GET' or 'POST' depending on your backend requirements
+            });
+
+            const data = await response.json();
+           
+            if (data.success) {
+                resultDiv.innerHTML = 'Live streaming started.';
+            } else {
+                resultDiv.innerHTML = 'Failed to start live streaming.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            resultDiv.innerHTML = 'An error occurred while starting live streaming.';
+        }
+    });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+               
+                if (data.success) {
+                    resultDiv.innerHTML = 'Video processing successful. You can view the processed video';
+                } else {
+                    resultDiv.innerHTML = 'Video processing failed.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = 'An error occurred during video processing.';
+            }
+        });
+
+
+        window.watsonAssistantChatOptions = {
+        integrationID: "6317c514-8d17-4670-aa37-db683e63a81f", // The ID of this integration.
+        region: "eu-gb", // The region your integration is hosted in.
+        serviceInstanceID: "6186c43b-ff20-449a-b881-3ae9b999b2a0", // The ID of your service instance.
+        onLoad: function(instance) { instance.render(); }
+        };
+        setTimeout(function(){
+        const t=document.createElement('script');
+        t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+        });
+
+    </script>
+</body>
+</html>

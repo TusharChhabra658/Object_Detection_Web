@@ -1,0 +1,81 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: black;
+}
+#main{
+    /* border: 1px solid white; */
+    background-image: -webkit-linear-gradient(grey,rgba(255, 255, 255, 0.234));
+    border-radius: 5vw;
+    box-shadow: 0.6vw 0.6vw 1.5vw 0vw purple;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 80vh;
+    margin: 10vh 65vh;
+    padding: 2vw 2vh;
+}
+#main h1{
+    color: white;
+    font-size: 2.5vw;
+    text-align: center;
+    padding: 1.5vw;
+    font-family: 'Poppins', sans-serif;
+}
+button {
+    background-color: purple;
+    font-size: 1.25vw;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    padding: 1vw;
+    margin: auto;
+    border: 1px solid white;
+    font-family: 'Poppins', sans-serif;
+}
+button:hover , #lb:hover{
+    cursor: pointer;
+    background-color: rgb(190, 36, 190);
+    transition: 0.3s ease-in-out;
+}
+input[type="file"]{
+    display: none;
+}
+#pic{
+    /* border: 2px solid white; */
+    width: 100%;
+    height: 40vh;
+    padding: 1.25vw;
+}
+img{
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 3vw;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+#lb , button{
+    background-color: purple;
+    color: white;
+    font-size: 1.25vw;
+    border-radius: 5vw;
+    text-align: center;
+    padding: 0.5vw;
+    border: 1px solid white;
+    font-family: 'Poppins', sans-serif;
+}
+#upload-form{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5vw;
+    height: 50vh;
+    /* border: 2px solid white; */
+    justify-content: center;
+}
